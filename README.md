@@ -17,7 +17,8 @@ Verify that every container in that Pod requests no more than 50 MiB of memory.
 kubectl apply -f https://raw.githubusercontent.com/n1g3ld0uglas/sysdig-memory-test/main/memory-constraints.yaml --namespace=constraints-mem-example
 ```
 
-View detailed information about the LimitRange:
+View detailed information about the LimitRange <br/>
+Any relevent information is under the ```limits:``` section
 ```
 kubectl get limitrange mem-min-max-demo-lr --namespace=constraints-mem-example --output=yaml
 ```
