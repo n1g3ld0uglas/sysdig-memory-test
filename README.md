@@ -26,15 +26,14 @@ The output shows the minimum and maximum memory constraints as expected. <br/>
 Even though you didn't specify default values in the configuration file for the LimitRange, they were created automatically.
 
 ```
+spec:
   limits:
   - default:
-      memory: 1Gi
+      memory: 50Mi
     defaultRequest:
-      memory: 1Gi
+      memory: 50Mi
     max:
-      memory: 1Gi
-    min:
-      memory: 500Mi
+      memory: 50Mi
     type: Container
 ```
 
