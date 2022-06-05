@@ -37,6 +37,8 @@ spec:
     type: Container
 ```
 
+Create the boutique test application in the namespace ```constraints-mem-example```. <br/>
+This way those constraints will apply specifically to this newly-introduce application only.
 
 ```
 kubectl apply -f https://raw.githubusercontent.com/GoogleCloudPlatform/microservices-demo/master/release/kubernetes-manifests.yaml -n constraints-mem-example
