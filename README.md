@@ -1,9 +1,44 @@
 # Sysdig Memory Test
 
-Repo provides a series of scenarios to identify out of memory issues in pods.
-
-## Deploy the Boutique Store Application
+Repo provides a series of scenarios to identify out of memory issues in pods. <br/>
+You specify minimum and maximum memory values in a ```LimitRange``` object. <br/>
+<br/>
+Firstly, create a namespace so that the resources you create in this exercise are isolated from the rest of your cluster. <br/>
+If a Pod does not meet the constraints imposed by the LimitRange, it cannot be created in the namespace.
 
 ```
-kubectl apply -f https://raw.githubusercontent.com/GoogleCloudPlatform/microservices-demo/master/release/kubernetes-manifests.yaml
+kubectl create namespace constraints-mem-example
+```
+
+Create the LimitRange within the network namespace ```constraints-mem-example```. <br/>
+Verify that every container in that Pod requests no more than 50 MiB of memory.
+
+```
+kubectl apply -f https://raw.githubusercontent.com/n1g3ld0uglas/sysdig-memory-test/main/memory-constraints.yaml --namespace=constraints-mem-example
+```
+
+View detailed information about the LimitRange:
+```
+kubectl get limitrange mem-min-max-demo-lr --namespace=constraints-mem-example --output=yaml
+```
+
+The output shows the minimum and maximum memory constraints as expected. <br/>
+Even though you didn't specify default values in the configuration file for the LimitRange, they were created automatically.
+
+```
+  limits:
+  - default:
+      memory: 1Gi
+    defaultRequest:
+      memory: 1Gi
+    max:
+      memory: 1Gi
+    min:
+      memory: 500Mi
+    type: Container
+```
+
+
+```
+kubectl apply -f https://raw.githubusercontent.com/GoogleCloudPlatform/microservices-demo/master/release/kubernetes-manifests.yaml -n constraints-mem-example
 ```  
