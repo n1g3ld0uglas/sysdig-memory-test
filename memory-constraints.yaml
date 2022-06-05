@@ -5,5 +5,5 @@ metadata:
 spec:
   limits:
   - max:
-      memory: 50Mi
+      memory: 200Mi
     type: Container
